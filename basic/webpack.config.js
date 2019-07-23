@@ -9,7 +9,19 @@ module.exports = {
   devServer: { contentBase: './dist' },
   module: {
     rules: [
-      { test: /\.css$/, use: ExtractTextPlugin.extract({ use: 'css-loader' }) }
+      { test: /\.css$/, use: ExtractTextPlugin.extract({ use: 'css-loader' }) },
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
+        ],
+        exclude: /node_modules/
+      }
     ]
   },
   plugins: [new ExtractTextPlugin('style.css')]
